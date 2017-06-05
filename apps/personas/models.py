@@ -102,6 +102,22 @@ class Personas(models.Model):
     apellido_personas = models.CharField(max_length=30)
     sexo_personas = models.CharField(max_length=12)
     edad_personas = models.CharField(max_length=2)
+    fecha_ingreso = models.DateField()
+    empleo = models.BooleanField(default=False)
+    origen_ingreso = models.CharField(max_length=10)
+    ingreso_promedio_mensual = models.CharField(max_length=10)
+    hoja_de_vida = models.FileField(upload_to='cv')
+    email = models.EmailField()
+
+
+
+
+
+
+
+
+
+
 
 
 
