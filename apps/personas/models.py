@@ -1,5 +1,5 @@
 from django.db import models
-
+from smart_selects.db_fields import ChainedForeignKey
 # Create your models here.
 
 
@@ -108,6 +108,15 @@ class Personas(models.Model):
     ingreso_promedio_mensual = models.CharField(max_length=10)
     hoja_de_vida = models.FileField(upload_to='cv')
     email = models.EmailField()
+
+    # educacion
+    grado_escolaridad = models.ForeignKey(GradoEscolaridad)
+    titulo_grado = ChainedForeignKey(
+        TituloGrado,
+        chained_field='grado_escolaridad',
+        chained_model_field='grado_escolaridad'
+    )
+
 
 
 
