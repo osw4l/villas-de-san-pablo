@@ -1,0 +1,6 @@
+Django==1.11.1
+django-smart-selects==1.5.2
+django-widget-tweaks==1.4.1
+djangorestframework==3.6.3
+psycopg2==2.7.1
+pytz==2017.2
