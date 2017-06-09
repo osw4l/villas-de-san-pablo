@@ -87,8 +87,8 @@ class TipoFormacionAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.FormacionComplementariaPersona)
-class FormacionAdmin(admin.ModelAdmin):
-    list_display = ['personas',
+class FormacionComplementariaPersonaAdmin(admin.ModelAdmin):
+    list_display = ['persona',
                     'nombre_curso',
                     'tipo_formacion']
 
