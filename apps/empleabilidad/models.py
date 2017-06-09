@@ -46,7 +46,7 @@ class FormacionTrabajo(models.Model):
 
 class FormacionTrabajoPersona(models.Model):
     persona = models.ForeignKey('personas.Persona')
-    fecha_instripcion = models.DateField()
+    fecha_inscripcion = models.DateField()
     tipo_formacion = models.CharField(
         max_length=30,
         choices=constants.TIPO_FORMACION
