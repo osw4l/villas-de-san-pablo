@@ -127,6 +127,14 @@ class Casa(CantidadPersonas, models.Model):
 
 
 class Persona(models.Model):
+    identificacion = models.CharField(
+        max_length=20,
+        unique=True
+    )
+    tipo_documento_identificacion = models.CharField(
+        max_length=30,
+        choices=constants.TIPO_DOCUMENTO
+    )
     nombres = models.CharField(max_length=100)
     apellidos = models.CharField(max_length=100)
     sexo = models.CharField(
@@ -180,6 +188,19 @@ class Persona(models.Model):
         chained_field='manzana',
         chained_model_field='manzana'
     )
+
+    def __str__(self):
+        return '{} - {} : {} '.format(
+            self.get_full_name(),
+            self.identificacion,
+            self.get_vivienda()
+        )
+
+    def get_full_name(self):
+        return '{} {}'.format(self.nombres, self.apellidos)
+
+    def get_vivienda(self):
+        return self.casa
 
 
 class ExperienciaLaboralPersona(models.Model):

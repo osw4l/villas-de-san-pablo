@@ -44,16 +44,22 @@ class CasaAdmin(admin.ModelAdmin):
                     'numero_manzana',
                     'tipo_vivienda',
                     'cantidad_personas']
+    search_fields = ['numero_casa',
+                    'numero_manzana',
+                    'tipo_vivienda',
+                    'cantidad_persona']
 
 
 @admin.register(models.Persona)
 class PersonaAdmin(admin.ModelAdmin):
-    list_display = ['nombres',
+    list_display = ['identificacion',
+                    'tipo_documento_identificacion',
+                    'nombres',
                     'apellidos',
                     'sexo',
                     'estado_civil',
                     'edad',
-                    'telefono_1'
+                    'telefono_1',
                     'telefono_2',
                     'fecha_de_registro',
                     'fecha_ingreso',
@@ -72,6 +78,7 @@ class PersonaAdmin(admin.ModelAdmin):
                     'tipo_manzana',
                     'manzana',
                     'casa']
+    search_fields = ['identificacion', 'telefono_1', 'telefono_2']
 
 
 @admin.register(models.TipoFormacionComplementaria)
