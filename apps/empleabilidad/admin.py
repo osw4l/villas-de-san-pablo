@@ -10,9 +10,9 @@ class VacanteAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.VacantePersona)
-class VacantePersonasAdmin(admin.ModelAdmin):
+class VacantePersonaAdmin(admin.ModelAdmin):
     list_display = ['vacante',
-                    'personas',
+                    'persona',
                     'fecha_contratacion',
                     'tiempo_contrato',
                     'salario',
@@ -27,7 +27,7 @@ class FormacionTrabajoAdmin(admin.ModelAdmin):
 
 @admin.register(models.FormacionTrabajoPersona)
 class FormacionPersonaAdmin(admin.ModelAdmin):
-    list_display = ['personas',
+    list_display = ['persona',
                     'fecha_inscripcion',
                     'tipo_formacion',
                     'estado',
