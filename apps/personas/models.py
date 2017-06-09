@@ -5,7 +5,15 @@ from smart_selects.db_fields import ChainedForeignKey
 # Create your models here.
 
 
-class GradoEscolaridad(models.Model):
+class CantidadPersonas(object):
+    class Meta:
+        abstract = True
+
+    def cantidad_personas(self):
+        return self.personas().count()
+
+
+class GradoEscolaridad(CantidadPersonas, models.Model):
     nombre_grado_escolaridad = models.CharField(
         max_length=30,
         unique=True
@@ -22,7 +30,8 @@ class GradoEscolaridad(models.Model):
         return Persona.objects.filter(grado_escolaridad=self)
 
 
-class TituloGrado(models.Model):
+
+class TituloGrado(CantidadPersonas, models.Model):
     nombre_titulo = models.CharField(
         max_length=50,
         unique=True
@@ -40,7 +49,7 @@ class TituloGrado(models.Model):
         return Persona.objects.filter(titulo_grado=self)
 
 
-class TipoVivienda(models.Model):
+class TipoVivienda(CantidadPersonas, models.Model):
     nombre_tipo_vivienda = models.CharField(
         max_length=30,
         unique=True
@@ -57,7 +66,7 @@ class TipoVivienda(models.Model):
         return Persona.objects.filter(tipo_vivienda=self)
 
 
-class TipoManzana(models.Model):
+class TipoManzana(CantidadPersonas, models.Model):
     nombre_tipo_manzana = models.CharField(
         max_length=30,
         unique=True
@@ -74,7 +83,7 @@ class TipoManzana(models.Model):
         return Persona.objects.filter(tipo_manzana=self)
 
 
-class Manzana(models.Model):
+class Manzana(CantidadPersonas, models.Model):
     numero_manzana = models.SmallIntegerField()
     tipo_manzana = models.ForeignKey(TipoManzana)
 
@@ -90,7 +99,7 @@ class Manzana(models.Model):
         return Persona.objects.filter(manzana=self)
 
 
-class Casa(models.Model):
+class Casa(CantidadPersonas, models.Model):
     direccion_casa = models.CharField(
         max_length=30,
         unique=True
