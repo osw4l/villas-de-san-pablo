@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import ListView
+from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 from apps.utils.shortcuts import get_object_or_none
 
@@ -10,7 +11,8 @@ class BaseListView(LoginRequiredMixin, ListView):
 
 
 class BaseCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'forms/__base.html'
+    template_name = 'apps/base/base_form.html'
+
 
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data(**kwargs)
@@ -46,7 +48,7 @@ class DirectDeleteMixin(object):
 
 
 class BaseUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'forms/base_form.html'
+    template_name = 'apps/base/base_form.html'
 
     def get_context_data(self, **kwargs):
         context = super(BaseUpdateView, self).get_context_data(**kwargs)
@@ -56,4 +58,8 @@ class BaseUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         obj = self.model.objects.get(id=self.kwargs['pk'])
         return obj
+
+
+class BaseTemplateView(LoginRequiredMixin, TemplateView):
+    pass
 

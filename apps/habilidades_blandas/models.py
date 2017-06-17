@@ -2,13 +2,6 @@ from django.db import models
 from . import constants
 # Create your models here.
 
-#Habilidades blandas (capacitaciones):
-#Fk (Persona)
-#Estado_certificado = (‘entregado’, ‘en proceso’, ‘pendiente’)
-#Alertas (‘baja’, ‘media’, ‘alta’)
-#Test de habilidades blandas Boolean()
-#Observaciones Text()
-
 
 class Capacitacion(models.Model):
     nombre = models.CharField(max_length=50)

@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+<form method="post" class="form-horizontal">{% csrf_token %}
+    <div class="panel-body">
+        {% for field in form %}
+            <div class="form-group is-empty {% if field.errors %}has-error{% elif field.value %}has-success{% endif %}">
+                <label class="col-md-2 control-label">{{ field.label }}</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        {% render_field field class="form-control" placeholder=field.label %}
+                        <strong class="text-danger">
+                            {{ field.errors }}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-5">
+                <button class="btn-raised btn-success btn">
+                    {{ action }}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

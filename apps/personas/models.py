@@ -1,7 +1,10 @@
 from django.db import models
+from django.core.urlresolvers import reverse_lazy
 from . import constants
 from django.core import validators
 from smart_selects.db_fields import ChainedForeignKey
+
+
 # Create your models here.
 
 
@@ -29,6 +32,11 @@ class GradoEscolaridad(CantidadPersonas, models.Model):
     def personas(self):
         return Persona.objects.filter(grado_escolaridad=self)
 
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_grado_escolaridad',
+                            kwargs={
+                                'pk': self.pk
+                            })
 
 
 class TituloGrado(CantidadPersonas, models.Model):
@@ -48,6 +56,38 @@ class TituloGrado(CantidadPersonas, models.Model):
     def personas(self):
         return Persona.objects.filter(titulo_grado=self)
 
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_titulo_grado',
+                            kwargs={
+                                'pk': self.pk
+                            })
+
+
+class TipoManzana(CantidadPersonas, models.Model):
+    nombre_tipo_manzana = models.CharField(
+        max_length=30,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Tipo de Manzana'
+        verbose_name_plural = 'Tipos de Manzana'
+
+    def __str__(self):
+        return '{}'.format(self.nombre_tipo_manzana)
+
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_tipo_manzana',
+                            kwargs={
+                                'pk': self.pk
+                            })
+
+    def personas(self):
+        return Persona.objects.filter(tipo_manzana=self)
+
+    def casas(self):
+        return Casa.objects.filter(tipo_manzana=self)
+
 
 class TipoVivienda(CantidadPersonas, models.Model):
     nombre_tipo_vivienda = models.CharField(
@@ -65,22 +105,14 @@ class TipoVivienda(CantidadPersonas, models.Model):
     def personas(self):
         return Persona.objects.filter(tipo_vivienda=self)
 
+    def casas(self):
+        return Casa.objects.filter(tipo_vivienda=self)
 
-class TipoManzana(CantidadPersonas, models.Model):
-    nombre_tipo_manzana = models.CharField(
-        max_length=30,
-        unique=True
-    )
-
-    class Meta:
-        verbose_name = 'Tipo de Manzana'
-        verbose_name_plural = 'Tipos de Manzana'
-
-    def __str__(self):
-        return '{}'.format(self.nombre_tipo_manzana)
-
-    def personas(self):
-        return Persona.objects.filter(tipo_manzana=self)
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_tipo_vivienda',
+                            kwargs={
+                                'pk': self.pk
+                            })
 
 
 class Manzana(CantidadPersonas, models.Model):
@@ -95,8 +127,17 @@ class Manzana(CantidadPersonas, models.Model):
     def __str__(self):
         return 'Manzana #{}'.format(self.numero_manzana)
 
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_manzana',
+                            kwargs={
+                                'pk': self.pk
+                            })
+
     def personas(self):
         return Persona.objects.filter(manzana=self)
+
+    def casas(self):
+        return Casa.objects.filter(numero_manzana=self)
 
 
 class Casa(CantidadPersonas, models.Model):
@@ -105,10 +146,14 @@ class Casa(CantidadPersonas, models.Model):
         unique=True
     )
     numero_casa = models.SmallIntegerField()
-    numero_telefono = models.CharField(max_length=15)
-    numero_telefono_2 = models.CharField(max_length=15)
-    numero_telefono_3 = models.CharField(max_length=15)
-    numero_manzana = models.ForeignKey(Manzana)
+    numero_telefono = models.CharField(max_length=15, blank=True, null=True)
+    numero_telefono_2 = models.CharField(max_length=15, blank=True, null=True)
+    tipo_manzana = models.ForeignKey(TipoManzana)
+    numero_manzana = ChainedForeignKey(
+        Manzana,
+        chained_field='tipo_manzana',
+        chained_model_field='tipo_manzana'
+    )
     tipo_vivienda = models.ForeignKey(TipoVivienda)
 
     class Meta:
@@ -121,6 +166,12 @@ class Casa(CantidadPersonas, models.Model):
             self.numero_manzana,
             self.direccion_casa
         )
+
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_casa',
+                            kwargs={
+                                'pk': self.pk
+                            })
 
     def personas(self):
         return Persona.objects.filter(casa=self)
@@ -196,6 +247,12 @@ class Persona(models.Model):
             self.get_vivienda()
         )
 
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_persona',
+                            kwargs={
+                                'pk': self.pk
+                            })
+
     def get_full_name(self):
         return '{} {}'.format(self.nombres, self.apellidos)
 
@@ -235,5 +292,3 @@ class FormacionComplementariaPersona(models.Model):
     persona = models.ForeignKey(Persona)
     nombre_curso = models.CharField(max_length=30)
     tipo_formacion = models.ForeignKey(TipoFormacionComplementaria)
-
-

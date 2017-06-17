@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse_lazy
+from apps.utils.constants import input_formats
 from . import constants
 # Create your models here.
 
@@ -14,6 +16,12 @@ class Vacante(models.Model):
 
     def __str__(self):
         return '{} ${}, {}'.format(self.cargo, self.salario, self.fecha)
+
+    def get_update_url(self):
+        return reverse_lazy('empleabilidad:editar_vacante',
+                            kwargs={
+                                'pk': self.pk
+                            })
 
 
 class VacantePersona(models.Model):
@@ -43,8 +51,15 @@ class FormacionTrabajo(models.Model):
         max_length=100
     )
 
+    def get_update_url(self):
+        return reverse_lazy('empleabilidad:editar_formacion_trabajo',
+                            kwargs={
+                                'pk': self.pk
+                            })
+
 
 class FormacionTrabajoPersona(models.Model):
+    programa = models.ForeignKey(FormacionTrabajo)
     persona = models.ForeignKey('personas.Persona')
     fecha_inscripcion = models.DateField()
     tipo_formacion = models.CharField(

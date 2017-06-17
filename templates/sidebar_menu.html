@@ -1,0 +1,64 @@
+<ul class="acc-menu">
+    <li class="nav-separator"><span>Menu de navegacion</span></li>
+    <li>
+        <a class="withripple" href="{% url 'main:inicio' %}">
+            <span class="icon">
+		        <i class="material-icons">home</i>
+            </span>
+                <span>Inicio</span>
+                <div class="ripple-container"></div>
+        </a>
+    </li>
+    <li class="hasChild"><a class="withripple" href="javascript:;">
+        <span class="icon">
+            <i class="fa fa-graduation-cap"></i>
+        </span>
+        <span>Educacion</span>
+        <div class="ripple-container"></div>
+    </a>
+        <ul class="acc-menu">
+            <li><a class="withripple" href="{% url 'personas:lista_grados_escolaridad' %}">Grados de escolaridad</a></li>
+            <li><a class="withripple" href="{% url 'personas:lista_titulos_grado' %}">Titulos de grado</a></li>
+        </ul>
+    </li>
+    <li class="hasChild"><a class="withripple" href="javascript:;">
+        <span class="icon">
+            <i class="material-icons">location_on</i>
+        </span>
+        <span>Infraestructura</span>
+        <div class="ripple-container"></div>
+    </a>
+        <ul class="acc-menu">
+            <li><a class="withripple" href="{% url 'personas:lista_tipos_manzana' %}">Tipos de manzana</a></li>
+            <li><a class="withripple" href="{% url 'personas:lista_tipos_vivienda' %}">Tipos de vivienda</a></li>
+            <li><a class="withripple" href="{% url 'personas:lista_manzanas' %}">Manzanas</a></li>
+        </ul>
+    </li>
+    <li>
+        <a class="withripple" href="{% url 'personas:lista_casas' %}"><span class="icon">
+		    <i class="material-icons">favorite_border</i></span>
+                <span>Casas</span>
+                <div class="ripple-container"></div>
+        </a>
+    </li>
+    <li>
+        <a class="withripple" href="index.html"><span class="icon">
+		    <i class="material-icons">accessibility</i></span>
+                <span>Personas</span>
+                <div class="ripple-container"></div>
+        </a>
+    </li>
+    <li class="hasChild"><a class="withripple" href="javascript:;">
+        <span class="icon">
+            <i class="material-icons">account_circle</i>
+        </span>
+        <span>Empleabilidad</span>
+        <div class="ripple-container"></div>
+    </a>
+        <ul class="acc-menu">
+            <li><a class="withripple" href="{% url 'empleabilidad:lista_vacantes' %}">Vacantes</a></li>
+            <li><a class="withripple" href="{% url 'empleabilidad:lista_formaciones_trabajo' %}">Formacion para el trabajo</a></li>
+        </ul>
+    </li>
+
+</ul>

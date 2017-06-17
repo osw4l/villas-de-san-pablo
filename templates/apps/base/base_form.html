@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% block main %}
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" data-widget="{&quot;draggable&quot;: &quot;false&quot;}"
+                 data-widget-static=""
+                 style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>
+                        {{ action }} {{ form.title }}
+                    </h2>
+                    {% if form.errors %}
+                        <br>
+                        <div class="alert alert-danger alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true"></button>
+                            <strong>Error!</strong>
+                            {% if not form.non_field_errors %}
+                                por favor revise los campos marcados
+                            {% else %}
+                                {% for error in form.non_field_errors %}
+                                    {{ error|escape }}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    {% endif %}
+                    <div class="panel-ctrls" data-actions-container=""
+                         data-action-collapse="{&quot;target&quot;: &quot;.panel-body, .panel-footer&quot;}"><span
+                            class="button-icon has-bg"><span class="material-icons">keyboard_arrow_up</span></span>
+                    </div>
+                </div>
+                {% include 'apps/base/form.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_extra %}
+    <script>
+        $(document).ready(function () {
+            $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+            $('#id_fecha').datepicker({
+                todayHighlight: true
+            });
+
+        });
+    </script>
+
+{% endblock %}
