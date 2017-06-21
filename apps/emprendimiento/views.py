@@ -45,3 +45,22 @@ class TipoUnidadProductivaListView(views.BaseListViewDinamicHeader):
     template_name = 'apps/emprendimiento/tipo_negocio_list.html'
 
 
+class SectorBaseView(object):
+    model = models.Sector
+    form_class = forms.SectorForm
+    success_url = reverse_lazy('emprendimiento:lista_sectores')
+
+
+class SectorCreateView(SectorBaseView, views.BaseCreateView):
+    pass
+
+
+class SectorUpdateView(SectorBaseView, views.BaseUpdateView):
+    pass
+
+
+class SectorListView(views.BaseListViewDinamicHeader):
+    HEADER = ('id', 'Nombre')
+    model = models.Sector
+    template_name = 'apps/emprendimiento/sector_list.html'
+
