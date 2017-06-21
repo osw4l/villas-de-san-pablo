@@ -1,6 +1,6 @@
 {% extends 'apps/base/list_base.html' %}
 {% block title_table %}
-    Lista de grados de escolaridad
+    Lista tipos de negocio
 {% endblock %}
 
 {% block content_main_table_data %}
@@ -9,10 +9,10 @@
             {{ obj.id }}
         </td>
         <td class="center text-center">
-            {{ obj.nombre_grado_escolaridad }}
+            {{ obj.nombre }}
         </td>
         <td class="center text-center">
-            {{ obj.personas.count }}
+            {{ obj.negocios }}
         </td>
         <td class="center text-center">
             <a href="{{ obj.get_update_url }}" class="btn btn-info btn-raised waves-effect btn-xs"
@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block fab %}
-<a href="{% url 'personas:crear_grado_escolaridad' %}" class="btn btn-primary btn-fab demo-switcher-fab"
+<a href="{% url 'emprendimiento:crear_tipo_negocio' %}" class="btn btn-primary btn-fab demo-switcher-fab"
         data-toggle="tooltip" data-placement="top"
         title="Crear grado de escolaridad">
     <i class="material-icons">add</i>

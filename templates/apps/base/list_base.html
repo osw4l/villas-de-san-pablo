@@ -5,17 +5,50 @@
 {% block css_extra %}
     <link href="{% static 'assets/plugins/datatables/dataTables.bootstrap.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'assets/plugins/datatables/dataTables.themify.css' %}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.3.3/css/colReorder.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.2.1/css/keyTable.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.0.0/css/rowGroup.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.0/css/rowReorder.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/scroller/1.4.2/css/scroller.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.2/css/select.bootstrap.min.css">
+
 {% endblock %}
 
 {% block js_extra %}
     <script src="{% static 'assets/plugins/datatables/jquery.dataTables.js' %}"></script>
     <script src="{% static 'assets/plugins/datatables/dataTables.bootstrap.js' %}"></script>
     <script src="{% static 'assets/demo/demo-datatables.js' %}"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/colreorder/1.3.3/js/dataTables.colReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://cdn.datatables.net/keytable/2.2.1/js/dataTables.keyTable.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/rowgroup/1.0.0/js/dataTables.rowGroup.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/scroller/1.4.2/js/dataTables.scroller.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js"></script>
     <script>
         $(document).ready(function () {
-
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-tooltip="true"]').tooltip();
+            $('.panel-ctrls-center > input').attr('placeholder', 'Buscar...');
+            $('.dt-button').addClass('btn');
+            $('.buttons-excel').addClass('btn-success btn-raised').removeClass('dt-button');
+            $('.buttons-copy').addClass('btn-info btn-raised').removeClass('dt-button');
+            $('.buttons-pdf').addClass('btn-danger btn-raised').removeClass('dt-button');
+            $('.buttons-colvis').addClass('btn-inverse btn-raised').removeClass('dt-button');
+            $('.buttons-print').addClass('btn-primary btn-raised').removeClass('dt-button');
         });
     </script>
 {% endblock %}

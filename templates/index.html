@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <title>Villas de San Pablo</title>
@@ -177,7 +177,7 @@
 {% endblock %}
 
 <!-- Switcher -->
-
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 <!-- Load jQuery -->
 <script src="{% static 'assets/js/jqueryui-1.10.3.min.js' %}"></script>
 <!-- Load jQueryUI -->
@@ -242,9 +242,6 @@
 <script src="{% static 'assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js' %}"></script> <!-- DateTime Picker -->
 
 <script src="{% static 'assets/plugins/clockface/js/clockface.js' %}"></script>                                    <!-- Clockface -->
-
-
-<script src="{% static 'assets/demo/demo-pickers.js' %}"></script>
 
 {% block js_extra %}
 {% endblock %}

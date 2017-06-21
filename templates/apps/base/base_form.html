@@ -40,9 +40,10 @@
 {% block js_extra %}
     <script>
         $(document).ready(function () {
-            $.fn.datepicker.defaults.format = "mm/dd/yyyy";
-            $('#id_fecha').datepicker({
-                todayHighlight: true
+
+            $('#id_fecha, #id_fecha_creacion, #id_fecha_ingreso, .date-picker').datepicker({
+                todayHighlight: true,
+                dateFormat: 'mm/dd/yyyy'
             });
 
         });
