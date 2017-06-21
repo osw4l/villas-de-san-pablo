@@ -136,9 +136,9 @@ def crear_persona(request):
     form_class = forms.PersonaForm
     experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=1, can_delete=True)
     formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=1, can_delete=True)
-    vacanteFormset = vacante_formset(form_class, extra=1, can_delete=True)
-    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=1, can_delete=True)
-    habilidadBlandaFormset = habilidad_formset(form_class, extra=1, can_delete=1)
+    vacanteFormset = vacante_formset(form_class, extra=5, can_delete=True)
+    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=5, can_delete=True)
+    habilidadBlandaFormset = habilidad_formset(form_class, extra=5, can_delete=True)
     persona = models.Persona()
     form = forms.PersonaForm(request.POST or None, instance=persona)
     formset_1 = experienciaFormset(request.POST or None, instance=persona)

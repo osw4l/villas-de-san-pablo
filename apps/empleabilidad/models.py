@@ -38,7 +38,8 @@ class VacantePersona(models.Model):
         blank=True,
         null=True
     )
-    observaciones = models.TextField(
+    observaciones = models.CharField(
+        max_length=100,
         blank=True,
         null=True
     )
@@ -82,7 +83,8 @@ class FormacionTrabajoPersona(models.Model):
         blank=True,
         null=True
     )
-    observacion = models.TextField(
+    observacion = models.CharField(
+        max_length=100,
         blank=True,
         null=True
     )

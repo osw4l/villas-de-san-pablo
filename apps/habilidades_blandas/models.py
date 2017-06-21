@@ -13,6 +13,7 @@ class Capacitacion(models.Model):
 
 class HabilidadBlanda(models.Model):
     persona = models.ForeignKey('personas.Persona', related_name='item_e')
+    capacitacion = models.ForeignKey(Capacitacion)
     estado_certificado = models.CharField(
         max_length=30,
         choices=constants.ESTADO_CERTIFICADO
@@ -26,7 +27,8 @@ class HabilidadBlanda(models.Model):
         default=False,
         verbose_name='Test de habilidades blandas'
     )
-    observaciones = models.TextField(
+    observaciones =models.CharField(
+        max_length=100,
         blank=True,
         null=True
     )

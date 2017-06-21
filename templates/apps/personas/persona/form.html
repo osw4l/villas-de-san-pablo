@@ -136,18 +136,245 @@
             </div>
         </div>
 
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-5">
-                    <button class="btn-raised btn-success btn">
-                        {{ formset_1.management_form }}
-                        {{ formset_2.management_form }}
-                        {{ formset_3.management_form }}
-                        {{ formset_4.management_form }}
-                        {{ action }}
-                    </button>
-                </div>
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <h2>Vacantes</h2>
+                {% for dict in formset_3.errors %}
+                    {% for error in dict.values %}
+                        <span class="text-danger"> {{ error }}</span>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table id="vacantes"
+                       class="table table-bordered table-stripped table-hover"
+                       align="center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Vacante</th>
+                        <th class="text-center">Fecha de contratacion</th>
+                        <th class="text-center">Tipo de contrato</th>
+                        <th class="text-center">Salario</th>
+                        <th class="text-center">Observaciones</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for form in formset_3.forms %}
+                        <tr id="{{ form.prefix }}-row">
+                            <td class="text-center">
+                                {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                                {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                                {% if form.errors %}
+                                    {% if not form.non_field_errors %}
+                                        por favor revise los campos marcados
+                                    {% else %}
+                                        {% for error in form.non_field_errors %}
+                                            <span class="text-danger"> {{ error|escape }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.vacante|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.fecha_contratacion|add_class:"form-control date" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.tiempo_contrato|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.salario|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.observaciones|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <h2>Formacion para el trabajo</h2>
+                {% for dict in formset_4.errors %}
+                    {% for error in dict.values %}
+                        <span class="text-danger"> {{ error }}</span>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table id="formacion_trabajo"
+                       class="table table-bordered table-stripped table-hover"
+                       align="center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Programa</th>
+                        <th class="text-center">Fecha Inscripcion</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Fecha del proceso</th>
+                        <th class="text-center">Observacion</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for form in formset_4.forms %}
+                        <tr id="{{ form.prefix }}-row">
+                            <td class="text-center">
+                                {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                                {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                                {% if form.errors %}
+                                    {% if not form.non_field_errors %}
+                                        por favor revise los campos marcados
+                                    {% else %}
+                                        {% for error in form.non_field_errors %}
+                                            <span class="text-danger"> {{ error|escape }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.programa|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.fecha_inscripcion|add_class:"form-control date" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.tipo_formacion|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.estado|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.fecha_proceso|add_class:"form-control date" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.observacion|add_class:"form-control date" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <h2>Habilidades Blandas</h2>
+                {% for dict in formset_5.errors %}
+                    {% for error in dict.values %}
+                        <span class="text-danger"> {{ error }}</span>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table id="habilidades_blandas"
+                       class="table table-bordered table-stripped table-hover"
+                       align="center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">Estado del certificado</th>
+                        <th class="text-center">Tipo de alerta</th>
+                        <th class="text-center">Test de habilidades blandas</th>
+                        <th class="text-center">Observaciones</th>
+                        <th class="text-center"></th>
+                    </tr>
+                    </thead>
+                    <tbody align="center">
+                    {% for form in formset_5.forms %}
+                        <tr id="{{ form.prefix }}-row">
+                            <td class="text-center">
+                                {% for fld in form.hidden_fields %}{{ fld }}{% endfor %}
+                                {% if form.instance.pk %}{{ form.DELETE }}{% endif %}
+                                {% if form.errors %}
+                                    {% if not form.non_field_errors %}
+                                        por favor revise los campos marcados
+                                    {% else %}
+                                        {% for error in form.non_field_errors %}
+                                            <span class="text-danger"> {{ error|escape }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.estado_certificado|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.tipo_alerta|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.test|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.observaciones|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-5">
+                <button class="btn-raised btn-success btn">
+                    {{ formset_1.management_form }}
+                    {{ formset_2.management_form }}
+                    {{ formset_3.management_form }}
+                    {{ formset_4.management_form }}
+                    {{ formset_5.management_form }}
+                    {{ action }}
+                </button>
             </div>
         </div>
     </div>
+
 </form>

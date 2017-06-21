@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
+from . import settings as base
 from apps.main import views
+from apps.utils import errors
 
 urlpatterns = [
     url(r'^$', views.log_in, name='entrar'),
@@ -29,4 +32,9 @@ urlpatterns = [
     url(r'^main/', include('apps.main.urls', namespace='main')),
     url(r'^personas/', include('apps.personas.urls', namespace='personas')),
 
-]
+] + static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
+
+handler400 = errors.error400
+handler403 = errors.error403
+handler404 = errors.error404
+handler500 = errors.error500
