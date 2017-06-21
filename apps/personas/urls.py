@@ -108,11 +108,11 @@ urlpatterns = [
         views.crear_persona,
         name='crear_persona'),
 
-    url(r'^editar-persona/',
-        views.crear_persona,
+    url(r'^editar-persona/(?P<pk>\d+)/',
+        views.editar_persona,
         name='editar_persona'),
 
-    url(r'^lista-persona/',
+    url(r'^lista-personas/',
         views.PersonasListView.as_view(),
         name='lista_personas')
 
