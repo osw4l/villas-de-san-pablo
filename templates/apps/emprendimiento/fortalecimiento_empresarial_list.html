@@ -1,6 +1,6 @@
 {% extends 'apps/base/list_base.html' %}
 {% block title_table %}
-    Lista tipos de negocio
+    Lista de Fortalecimiento Empresarial
 {% endblock %}
 
 {% block content_main_table_data %}
@@ -9,10 +9,22 @@
             {{ obj.id }}
         </td>
         <td class="center text-center">
-            {{ obj.nombre }}
+            {{ obj.personas }}
         </td>
         <td class="center text-center">
-            {{ obj.negocios.count }}
+            {{ obj.negocio }}
+        </td>
+        <td class="center text-center">
+            {{ obj.emprendimiento }}
+        </td>
+        <td class="center text-center">
+            {{ obj.rut}}
+        </td>
+        <td class="center text-center">
+            {{ obj.nit}}
+        </td>
+        <td class="center text-center">
+            {{ obj.camara_de_comercio}}
         </td>
         <td class="center text-center">
             <a href="{{ obj.get_update_url }}" class="btn btn-info btn-raised waves-effect btn-xs"
@@ -25,9 +37,9 @@
 {% endblock %}
 
 {% block fab %}
-<a href="{% url 'emprendimiento:crear_tipo_negocio' %}" class="btn btn-primary btn-fab demo-switcher-fab"
+<a href="{% url 'emprendimiento:crear_fortalecimiento_empresarial' %}" class="btn btn-primary btn-fab demo-switcher-fab"
         data-toggle="tooltip" data-placement="top"
-        title="Crear tipo negocio">
+        title="Crear Fortalecimiento Empresarial">
     <i class="material-icons">add</i>
 </a>
 {% endblock %}

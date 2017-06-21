@@ -1,6 +1,6 @@
 {% extends 'apps/base/list_base.html' %}
 {% block title_table %}
-    Lista tipos de negocio
+    Lista de Emprendimiento
 {% endblock %}
 
 {% block content_main_table_data %}
@@ -12,7 +12,13 @@
             {{ obj.nombre }}
         </td>
         <td class="center text-center">
-            {{ obj.negocios.count }}
+            {{ obj.direccion }}
+        </td>
+        <td class="center text-center">
+            {{ obj.propietario }}
+        </td>
+        <td class="center text-center">
+            {{ obj.tipo_negocio }}
         </td>
         <td class="center text-center">
             <a href="{{ obj.get_update_url }}" class="btn btn-info btn-raised waves-effect btn-xs"
@@ -25,9 +31,9 @@
 {% endblock %}
 
 {% block fab %}
-<a href="{% url 'emprendimiento:crear_tipo_negocio' %}" class="btn btn-primary btn-fab demo-switcher-fab"
+<a href="{% url 'emprendimiento:crear_emprendimiento' %}" class="btn btn-primary btn-fab demo-switcher-fab"
         data-toggle="tooltip" data-placement="top"
-        title="Crear tipo negocio">
+        title="Crear Emprendimiento">
     <i class="material-icons">add</i>
 </a>
 {% endblock %}
