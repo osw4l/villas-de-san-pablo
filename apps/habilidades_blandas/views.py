@@ -19,7 +19,7 @@ class CapacitacionUpdateView(CapacitacionBaseView, views.BaseUpdateView):
 
 
 class CapacitacionListView(views.BaseListViewDinamicHeader):
-    HEADER = ('id', 'Nombre')
+    HEADER = ('id', 'Nombre',)
     model = models.Capacitacion
     template_name = 'apps/habilidades_blandas/capacitacion_list.html'
 

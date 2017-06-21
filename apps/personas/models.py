@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse_lazy
 from . import constants
 from django.core import validators
 from smart_selects.db_fields import ChainedForeignKey
-
+from apps.habilidades_blandas.models import HabilidadBlanda
+from apps.empleabilidad.models import FormacionTrabajoPersona, VacantePersona
+from apps.emprendimiento.models import Negocio, Emprendimiento
 
 # Create your models here.
 
@@ -51,7 +53,7 @@ class TituloGrado(CantidadPersonas, models.Model):
         verbose_name_plural = 'Titulo Grados'
 
     def __str__(self):
-        return '{}'.format(self.grado_escolaridad)
+        return '{}'.format(self.nombre_titulo)
 
     def personas(self):
         return Persona.objects.filter(titulo_grado=self)
@@ -237,7 +239,7 @@ class Persona(models.Model):
     casa = ChainedForeignKey(
         Casa,
         chained_field='manzana',
-        chained_model_field='manzana'
+        chained_model_field='numero_manzana'
     )
 
     def __str__(self):
@@ -258,6 +260,33 @@ class Persona(models.Model):
 
     def get_vivienda(self):
         return self.casa
+
+    def get_absolute_url(self):
+        return reverse_lazy('personas:detalle_persona',
+                            kwargs={
+                                'pk': self.ppk
+                            })
+
+    def get_experiencias_laborales(self):
+        return ExperienciaLaboralPersona.objects.filter(persona=self)
+
+    def get_formaciones_complementarias(self):
+        return FormacionComplementariaPersona.objects.filter(persona=self)
+
+    def get_habilidades_blandas(self):
+        return HabilidadBlanda.objects.filter(persona=self)
+
+    def get_formaciones_trabajo(self):
+        return FormacionTrabajoPersona.objects.filter(persona=self)
+
+    def get_vacantes(self):
+        return VacantePersona.objects.filter(persona=self)
+
+    def get_negocios(self):
+        return Negocio.objects.filter(propietario=self)
+
+    def get_emprendimientos(self):
+        return Emprendimiento.objects.filter(persona=self)
 
 
 class ExperienciaLaboralPersona(models.Model):

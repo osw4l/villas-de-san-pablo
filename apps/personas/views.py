@@ -236,3 +236,7 @@ class PersonasListView(views.BaseListViewDinamicHeader):
     model = models.Persona
     template_name = 'apps/personas/lista_persona.html'
 
+
+class PersonaDetailView(views.BaseDetailView):
+    model = models.Persona
+    template_name = 'apps/personas/persona/detalle_persona.html'

@@ -231,6 +231,7 @@
                     <tr>
                         <th class="text-center">Programa</th>
                         <th class="text-center">Fecha Inscripcion</th>
+                        <th class="text-center">Tipo formacion</th>
                         <th class="text-center">Estado</th>
                         <th class="text-center">Fecha del proceso</th>
                         <th class="text-center">Observacion</th>
@@ -278,7 +279,7 @@
                             </td>
                             <td class="text-center">
                                 <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
-                                    {{ form.observacion|add_class:"form-control date" }}
+                                    {{ form.observacion|add_class:"form-control" }}
                                 </div>
                             </td>
                             <td class="text-center">
