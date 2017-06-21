@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+{% block main %}
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" data-widget="{&quot;draggable&quot;: &quot;false&quot;}"
+                 data-widget-static=""
+                 style="visibility: visible; opacity: 1; display: block; transform: translateY(0px);">
+                <div class="panel-heading">
+                    <h2>
+                        {{ action }} {{ form.title }}
+                    </h2>
+                    {% if form.errors %}
+                        <br>
+                        <div class="alert alert-danger alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true"></button>
+                            <strong>Error!</strong>
+                            {% if not form.non_field_errors %}
+                                por favor revise los campos marcados
+                            {% else %}
+                                {% for error in form.non_field_errors %}
+                                    {{ error|escape }}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    {% endif %}
+                    <div class="panel-ctrls" data-actions-container=""
+                         data-action-collapse="{&quot;target&quot;: &quot;.panel-body, .panel-footer&quot;}"><span
+                            class="button-icon has-bg"><span class="material-icons">keyboard_arrow_up</span></span>
+                    </div>
+                </div>
+                {% include 'apps/personas/persona/form.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js_extra %}
+    {% load staticfiles %}
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#id_fecha_ingreso').datepicker({
+                todayHighlight: true,
+                dateFormat: 'mm/dd/yyyy'
+            });
+
+            $('.add-row').addClass('btn btn-info btn-raised');
+            $('.delete-row').addClass('btn btn-danger btn-raised').removeClass('btn-xs');
+            $('.dynamic-form-add').alignCenter;
+
+            $('#experiencia_laboral tbody tr').formset({
+                prefix: 'item_a'
+            });
+
+            $('#formacion_complementaria tbody tr').formset({
+                prefix: 'item_b'
+            });
+
+            $('#vacantes tbody tr').formset({
+                prefix: 'item_c'
+            });
+
+            $('#formacion_trabajo tbody tr').formset({
+                prefix: 'item_d'
+            });
+
+        });
+    </script>
+
+{% endblock %}

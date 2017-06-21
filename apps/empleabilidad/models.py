@@ -24,8 +24,8 @@ class Vacante(models.Model):
 
 
 class VacantePersona(models.Model):
+    persona = models.ForeignKey('personas.Persona', related_name='item_c')
     vacante = models.ForeignKey(Vacante)
-    persona = models.ForeignKey('personas.Persona')
     fecha_contratacion = models.DateField(
         blank=True,
         null=True
@@ -67,8 +67,8 @@ class FormacionTrabajo(models.Model):
 
 
 class FormacionTrabajoPersona(models.Model):
+    persona = models.ForeignKey('personas.Persona', related_name='item_d')
     programa = models.ForeignKey(FormacionTrabajo)
-    persona = models.ForeignKey('personas.Persona')
     fecha_inscripcion = models.DateField()
     tipo_formacion = models.CharField(
         max_length=30,

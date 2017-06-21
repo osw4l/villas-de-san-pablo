@@ -3,6 +3,20 @@ from . import views
 
 urlpatterns = [
 
+   # tipos de formacion complementaria
+
+    url(r'^crear-tipo-formacion-complementaria/',
+        views.TipoFormacionComplementariaCreateView.as_view(),
+        name='crear_tipo_formacion_complementaria'),
+
+    url(r'^editar-tipo-formacion-complementaria/(?P<pk>\d+)/',
+        views.TipoFormacionComplementariaUpdateView.as_view(),
+        name='editar_tipo_formacion_complementaria'),
+
+    url(r'^lista-tipos-formacion-complementaria/',
+        views.TipoFormacionComplementariaListView.as_view(),
+        name='lista_tipos_formacion_complementaria'),
+
     # grados de escolaridad
 
     url(r'^crear-grado-escolaridad/',
@@ -86,6 +100,16 @@ urlpatterns = [
 
     url(r'^lista-casas/',
         views.CasaListView.as_view(),
-        name='lista_casas')
+        name='lista_casas'),
+
+    # personas
+
+    url(r'^crear-persona/',
+        views.crear_persona,
+        name='crear_persona'),
+
+    url(r'^editar-persona/',
+        views.crear_persona,
+        name='editar_persona')
 
 ]

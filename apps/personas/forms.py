@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import models as models_form
 from . import models
 from apps.utils import forms as utils, constants
 
@@ -48,6 +49,8 @@ class CasaForm(utils.BaseFormAllFields):
 class PersonaForm(utils.BaseFormAllFields):
     title = 'Persona'
     fecha_ingreso = forms.DateField(input_formats=constants.INPUT_FORMATS)
+    widget = forms.FileInput
+    hoja_de_vida = forms.FileField(widget=widget)
 
     class Meta(utils.BaseFormAllFields.Meta):
         model = models.Persona
@@ -60,7 +63,19 @@ class ExperienciaLaboralForm(utils.BaseFormAllFields):
         model = models.ExperienciaLaboralPersona
 
 
-class TipoFormacionForm(utils.BaseFormAllFields):
+def get_experiencia_laboral_persona_formset(form,
+                                            formset=models_form.BaseInlineFormSet,
+                                            **kwargs):
+    return models_form.inlineformset_factory(
+        models.Persona,
+        models.ExperienciaLaboralPersona,
+        form,
+        formset,
+        **kwargs
+    )
+
+
+class TipoFormacionComplementariaForm(utils.BaseFormAllFields):
     title = 'Tipo de formacion'
 
     class Meta(utils.BaseFormAllFields.Meta):
@@ -72,3 +87,15 @@ class FormacionComplementariaForm(utils.BaseFormAllFields):
 
     class Meta(utils.BaseFormAllFields.Meta):
         model = models.FormacionComplementariaPersona
+
+
+def get_formacion_complementaria_persona_formset(form,
+                                            formset=models_form.BaseInlineFormSet,
+                                            **kwargs):
+    return models_form.inlineformset_factory(
+        models.Persona,
+        models.FormacionComplementariaPersona,
+        form,
+        formset,
+        **kwargs
+    )

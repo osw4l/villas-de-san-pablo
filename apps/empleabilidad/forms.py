@@ -1,7 +1,8 @@
 from django import forms
 from . import models
 from apps.utils import forms as utils, constants
-
+from django.forms import models as models_form
+from apps.personas import models as persona_models
 
 class VacanteForm(utils.BaseFormAllFields):
     title = 'Vacante'
@@ -23,6 +24,18 @@ class VacantePersonaForm(utils.BaseFormAllFields):
         model = models.VacantePersona
 
 
+def get_vacante_persona_formset(form,
+                                formset=models_form.BaseInlineFormSet,
+                                **kwargs):
+    return models_form.inlineformset_factory(
+        persona_models.Persona,
+        models.VacantePersona,
+        form,
+        formset,
+        **kwargs
+    )
+
+
 class FormacionTrabajoForm(utils.BaseFormAllFields):
     title = 'Formacion para el trabajo'
     fecha_creacion = forms.DateField(input_formats=constants.INPUT_FORMATS)
@@ -38,3 +51,15 @@ class FormacionTrabajoPersonasForm(utils.BaseFormAllFields):
 
     class Meta(utils.BaseFormAllFields.Meta):
         model = models.FormacionTrabajoPersona
+
+
+def get_formacion_trabajo_persona_formset(form,
+                                          formset=models_form.BaseInlineFormSet,
+                                          **kwargs):
+    return models_form.inlineformset_factory(
+        persona_models.Persona,
+        models.FormacionTrabajoPersona,
+        form,
+        formset,
+        **kwargs
+    )
