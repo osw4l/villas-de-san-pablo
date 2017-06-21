@@ -261,7 +261,7 @@ class Persona(models.Model):
 
 
 class ExperienciaLaboralPersona(models.Model):
-    persona = models.ForeignKey(Persona)
+    persona = models.ForeignKey(Persona, related_name='item_a')
     nombre = models.CharField(
         max_length=255,
         verbose_name='Experiencia laboral'
@@ -287,8 +287,14 @@ class TipoFormacionComplementaria(models.Model):
     def __str__(self):
         return self.nombre
 
+    def get_update_url(self):
+        return reverse_lazy('personas:editar_tipo_formacion_complementaria',
+                            kwargs={
+                                'pk': self.pk
+                            })
+
 
 class FormacionComplementariaPersona(models.Model):
-    persona = models.ForeignKey(Persona)
+    persona = models.ForeignKey(Persona, related_name='item_b')
     nombre_curso = models.CharField(max_length=30)
     tipo_formacion = models.ForeignKey(TipoFormacionComplementaria)

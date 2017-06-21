@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-
+from apps.empleabilidad.forms import get_vacante_persona_formset as vacante_formset, \
+    get_formacion_trabajo_persona_formset  as formacion_trabajo_formset
 from apps.utils import views
 from . import models
 from . import forms
@@ -127,3 +129,86 @@ class CasaListView(views.BaseListViewDinamicHeader):
     model = models.Casa
     template_name = 'apps/personas/casa_list.html'
 
+
+@login_required
+def crear_persona(request):
+    template_name = 'apps/personas/persona/base_form.html'
+    form_class = forms.PersonaForm
+    experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=1, can_delete=True)
+    formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=1, can_delete=True)
+    vacanteFormset = vacante_formset(form_class, extra=1, can_delete=True)
+    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=1, can_delete=True)
+    persona = models.Persona()
+    form = forms.PersonaForm(request.POST or None, instance=persona)
+    formset_1 = experienciaFormset(request.POST or None, instance=persona)
+    formset_2 = formacionFormset(request.POST or None, instance=persona)
+    formset_3 = vacanteFormset(request.POST or None, instance=persona)
+    formset_4 = formacionTrabajoFormset(request.POST or None, instance=persona)
+    if request.POST:
+        if form.is_valid() and formset_1.is_valid() and formset_2.is_valid()\
+                and formset_3.is_valid() and formset_4.is_valid():
+            form.save()
+            formset_1.save()
+            formset_2.save()
+            formset_3.save()
+            formset_4.save()
+            return redirect('inventario:combos')
+
+    context = {
+        'form': form,
+        'formset_1': formset_1,
+        'formset_2': formset_2,
+        'formset_3': formset_3,
+        'formset_4': formset_4,
+        'action': 'Crear Persona'
+    }
+    return render(request, template_name, context)
+
+
+@login_required
+def editar_persona(request, **kwargs):
+    template_name = 'apps/personas/persona/base_form.html'
+    form_class = forms.PersonaForm
+    experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=0, can_delete=True)
+    formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=0, can_delete=True)
+    pk = kwargs.get('pk')
+    persona = models.Persona.objects.get(id=pk)
+    form = forms.PersonaForm(request.POST or None, instance=persona)
+    formset_1 = experienciaFormset(request.POST or None, instance=persona)
+    formset_2 = formacionFormset(request.POST or None, instance=persona)
+    if request.POST:
+        if form.is_valid() and formset_1.is_valid() and formset_2.is_valid():
+            form.save()
+            formset_1.save()
+            formset_2.save()
+            return redirect('inventario:combos')
+
+    context = {
+        'form': form,
+        'formset_1': formset_1,
+        'formset_2': formset_2,
+        'action': 'Crear Persona'
+    }
+    return render(request, template_name, context)
+
+
+class TipoFormacionComplementariaBaseView(object):
+    model = models.TipoFormacionComplementaria
+    form_class = forms.TipoFormacionComplementariaForm
+    success_url = reverse_lazy('personas:lista_tipos_formacion_complementaria')
+
+
+class TipoFormacionComplementariaCreateView(TipoFormacionComplementariaBaseView,
+                                          views.BaseCreateView):
+    pass
+
+
+class TipoFormacionComplementariaUpdateView(TipoFormacionComplementariaBaseView,
+                                          views.BaseUpdateView):
+    pass
+
+
+class TipoFormacionComplementariaListView(views.BaseListViewDinamicHeader):
+    HEADER = ('id', 'tipo de formacion complementaria')
+    model = models.TipoFormacionComplementaria
+    template_name = 'apps/personas/tipo_formacion_complementaria_list.html'
