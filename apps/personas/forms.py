@@ -1,5 +1,7 @@
 from django import forms
 from django.forms import models as models_form
+from easy_select2 import Select2
+
 from . import models
 from apps.utils import forms as utils, constants
 
@@ -41,6 +43,10 @@ class ManzanaForm(utils.BaseFormAllFields):
 
 class CasaForm(utils.BaseFormAllFields):
     title = 'Casa'
+    numero_manzana = forms.ModelChoiceField(
+        queryset=models.Manzana.objects.all(),
+        widget=Select2()
+    )
 
     class Meta(utils.BaseFormAllFields.Meta):
         model = models.Casa

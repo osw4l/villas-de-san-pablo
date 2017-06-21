@@ -112,7 +112,7 @@ urlpatterns = [
         views.editar_persona,
         name='editar_persona'),
 
-    url(r'^lista-persona/',
+    url(r'^lista-personas/',
         views.PersonasListView.as_view(),
         name='lista_personas')
 
