@@ -30,7 +30,7 @@ class BaseName(models.Model, BaseUpdateUrl):
         return Negocio.objects.filter(self.get_attr_queryset_value())
 
 
-class TipoNegocio(BaseName):
+class TipoNegocio(BaseName, BaseUpdateUrl):
     attr_query = 'tipo_negocio'
 
     class Meta:
@@ -38,7 +38,7 @@ class TipoNegocio(BaseName):
         verbose_name_plural = 'Tipos de negocio'
 
 
-class TipoUnidadProductiva(BaseName):
+class TipoUnidadProductiva(BaseName, BaseUpdateUrl):
     attr_query = 'tipo_unidad_productiva'
 
     class Meta:
@@ -46,7 +46,7 @@ class TipoUnidadProductiva(BaseName):
         verbose_name_plural = 'Tipos de unidades productivas'
 
 
-class Sector(BaseName):
+class Sector(BaseName, BaseUpdateUrl):
     attr_query = 'sector'
 
     class Meta:
