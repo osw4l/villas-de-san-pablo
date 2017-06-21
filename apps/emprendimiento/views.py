@@ -40,7 +40,7 @@ class TipoUnidadProductivaUpdateView(TipoUnidadProductivaBaseView, views.BaseUpd
 
 
 class TipoUnidadProductivaListView(views.BaseListViewDinamicHeader):
-    HEADER = ('id', 'Nombre', 'Negocios')
+    HEADER = ('id', 'Nombre')
     model = models.TipoUnidadProductiva
     template_name = 'apps/emprendimiento/tipo_unidad_productiva_list.html'
 
