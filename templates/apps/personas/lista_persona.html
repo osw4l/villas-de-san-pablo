@@ -1,0 +1,48 @@
+{% extends 'apps/base/list_base.html' %}
+{% block title_table %}
+    Lista de casas
+{% endblock %}
+
+{% block content_main_table_data %}
+    <tr class="odd" role="row">
+        <td class="center text-center">
+            {{ obj.numero_casa }}
+        </td>
+        <th class="text-center">
+            {{ obj.direccion_casa }}
+        </th>
+        <td class="center text-center">
+            {{ obj.tipo_manzana }}
+        </td>
+        <td class="text-center">
+            {{ obj.numero_manzana }}
+        </td>
+        <td class="text-center">
+            {{ obj.tipo_vivienda }}
+        </td>
+        <td class="text-center">
+            {{ obj.numero_telefono }}
+            {% if obj.numero_telefono_2 %}
+                - {{ obj.numero_telefono_2 }}
+            {% endif %}
+        </td>
+        <td class="center text-center">
+            {{ obj.personas.count }}
+        </td>
+        <td class="center text-center">
+            <a href="{{ obj.get_update_url }}" class="btn btn-info btn-raised waves-effect btn-xs"
+               data-toggle="tooltip" data-placement="top" title=""
+               data-original-title="Modificar">
+                <i class="fa fa-pencil"></i>
+            </a>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block fab %}
+<a href="{% url 'personas:crear_casa' %}" class="btn btn-primary btn-fab demo-switcher-fab"
+        data-toggle="tooltip" data-placement="top"
+        title="Crear casa">
+    <i class="material-icons">add</i>
+</a>
+{% endblock %}
