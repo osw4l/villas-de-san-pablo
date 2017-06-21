@@ -27,7 +27,7 @@ class BaseName(models.Model, BaseUpdateUrl):
         return {self.attr_query: self}
 
     def negocios(self):
-        return Negocio.objects.filter(self.get_attr_queryset_value())
+        return Negocio.objects.filter(**self.get_attr_queryset_value())
 
 
 class TipoNegocio(BaseName, BaseUpdateUrl):
