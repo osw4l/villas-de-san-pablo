@@ -110,6 +110,11 @@ urlpatterns = [
 
     url(r'^editar-persona/',
         views.crear_persona,
-        name='editar_persona')
+        name='editar_persona'),
+
+    url(r'^lista-persona/',
+        views.PersonasListView.as_view(),
+        name='lista_persona')
+
 
 ]

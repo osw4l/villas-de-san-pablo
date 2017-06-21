@@ -216,3 +216,11 @@ class TipoFormacionComplementariaListView(views.BaseListViewDinamicHeader):
     HEADER = ('id', 'tipo de formacion complementaria')
     model = models.TipoFormacionComplementaria
     template_name = 'apps/personas/tipo_formacion_complementaria_list.html'
+
+
+class PersonasListView(views.BaseListViewDinamicHeader):
+    HEADER = ('Identificacion', 'Tipo de Documento', 'Nombre', 'Apellido',
+              'Telefono', 'Direccion')
+    model = models.Persona
+    template_name = 'apps/personas/lista_persona.html'
+
