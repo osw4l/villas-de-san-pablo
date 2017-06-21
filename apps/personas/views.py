@@ -171,29 +171,41 @@ def crear_persona(request):
 
 @login_required
 def editar_persona(request, **kwargs):
-    template_name = 'apps/personas/persona/base_form.html'
     form_class = forms.PersonaForm
-    experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=0, can_delete=True)
-    formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=0, can_delete=True)
+    experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=1, can_delete=True)
+    formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=1, can_delete=True)
+    vacanteFormset = vacante_formset(form_class, extra=5, can_delete=True)
+    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=5, can_delete=True)
+    habilidadBlandaFormset = habilidad_formset(form_class, extra=5, can_delete=True)
     pk = kwargs.get('pk')
     persona = models.Persona.objects.get(id=pk)
     form = forms.PersonaForm(request.POST or None, instance=persona)
     formset_1 = experienciaFormset(request.POST or None, instance=persona)
     formset_2 = formacionFormset(request.POST or None, instance=persona)
+    formset_3 = vacanteFormset(request.POST or None, instance=persona)
+    formset_4 = formacionTrabajoFormset(request.POST or None, instance=persona)
+    formset_5 = habilidadBlandaFormset(request.POST or None, instance=persona)
     if request.POST:
-        if form.is_valid() and formset_1.is_valid() and formset_2.is_valid():
+        if form.is_valid() and formset_1.is_valid() and formset_2.is_valid() \
+                and formset_3.is_valid() and formset_4.is_valid() and formset_5.is_valid():
             form.save()
             formset_1.save()
             formset_2.save()
-            return redirect('inventario:combos')
+            formset_3.save()
+            formset_4.save()
+            formset_5.save()
+            return redirect('personas:lista_personas')
 
     context = {
         'form': form,
         'formset_1': formset_1,
         'formset_2': formset_2,
-        'action': 'Crear Persona'
+        'formset_3': formset_3,
+        'formset_4': formset_4,
+        'formset_5': formset_5,
+        'action': 'Modificar Persona'
     }
-    return render(request, template_name, context)
+    return render(request, 'apps/personas/persona/base_form.html', context)
 
 
 class TipoFormacionComplementariaBaseView(object):

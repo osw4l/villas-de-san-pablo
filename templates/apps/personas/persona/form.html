@@ -309,6 +309,7 @@
                        align="center">
                     <thead>
                     <tr>
+                        <th class="text-center">Capacitacion</th>
                         <th class="text-center">Estado del certificado</th>
                         <th class="text-center">Tipo de alerta</th>
                         <th class="text-center">Test de habilidades blandas</th>
@@ -331,6 +332,11 @@
                                         {% endfor %}
                                     {% endif %}
                                 {% endif %}
+                                <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
+                                    {{ form.capacitacion|add_class:"form-control" }}
+                                </div>
+                            </td>
+                            <td class="text-center">
                                 <div class="form-group {% if form.errors %}has-error{% endif %} has-feedback">
                                     {{ form.estado_certificado|add_class:"form-control" }}
                                 </div>

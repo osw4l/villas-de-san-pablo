@@ -114,7 +114,7 @@ urlpatterns = [
 
     url(r'^lista-persona/',
         views.PersonasListView.as_view(),
-        name='lista_persona')
+        name='lista_personas')
 
 
 ]
