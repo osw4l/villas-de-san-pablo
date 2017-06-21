@@ -19,10 +19,6 @@ class VacanteForm(utils.BaseFormAllFields):
 
 class VacantePersonaForm(utils.BaseFormAllFields):
     title = 'Vacante Persona'
-    fecha_contratacion = forms.DateField(
-        input_formats=constants.INPUT_FORMATS,
-        widget=forms.DateInput(attrs={'class': 'date'})
-    )
 
     class Meta(utils.BaseFormAllFields.Meta):
         model = models.VacantePersona

@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DetailView
 from apps.utils.shortcuts import get_object_or_none
 
 
@@ -61,3 +61,6 @@ class BaseUpdateView(LoginRequiredMixin, UpdateView):
 class BaseTemplateView(LoginRequiredMixin, TemplateView):
     pass
 
+
+class BaseDetailView(LoginRequiredMixin, DetailView):
+    pass
