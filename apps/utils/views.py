@@ -13,7 +13,6 @@ class BaseListView(LoginRequiredMixin, ListView):
 class BaseCreateView(LoginRequiredMixin, CreateView):
     template_name = 'apps/base/base_form.html'
 
-
     def get_context_data(self, **kwargs):
         context = super(BaseCreateView, self).get_context_data(**kwargs)
         context['action'] = 'Crear'
@@ -22,7 +21,6 @@ class BaseCreateView(LoginRequiredMixin, CreateView):
 
 class BaseListViewDinamicHeader(LoginRequiredMixin, ListView):
     context_object_name = "list"
-    paginate_by = 25
     query_fields = ()
     HEADER = None
 

@@ -1,6 +1,6 @@
 from django import forms
 from . import models
-from apps.utils import forms as utils
+from apps.utils import forms as utils, constants
 
 
 class GradoEscolaridadForm(utils.BaseFormAllFields):
@@ -47,6 +47,7 @@ class CasaForm(utils.BaseFormAllFields):
 
 class PersonaForm(utils.BaseFormAllFields):
     title = 'Persona'
+    fecha_ingreso = forms.DateField(input_formats=constants.INPUT_FORMATS)
 
     class Meta(utils.BaseFormAllFields.Meta):
         model = models.Persona

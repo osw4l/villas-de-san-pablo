@@ -25,6 +25,7 @@ def log_in(request):
 class InicioTemplateView(views.BaseTemplateView):
     template_name = 'apps/main/inicio.html'
 
+
 @login_required
 def salir(request):
     logout(request)

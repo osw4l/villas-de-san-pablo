@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse_lazy
-from apps.utils.constants import input_formats
 from . import constants
 # Create your models here.
 
@@ -51,11 +50,20 @@ class FormacionTrabajo(models.Model):
         max_length=100
     )
 
+    def __str__(self):
+        return '{} creado en {}'.format(
+            self.nombre_programa,
+            self.fecha_creacion
+        )
+
     def get_update_url(self):
         return reverse_lazy('empleabilidad:editar_formacion_trabajo',
                             kwargs={
                                 'pk': self.pk
                             })
+
+    def personas(self):
+        return FormacionTrabajoPersona.objects.filter(programa=self)
 
 
 class FormacionTrabajoPersona(models.Model):

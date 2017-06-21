@@ -215,7 +215,7 @@ class Persona(models.Model):
     vulnerabilidad = models.BooleanField(default=False)
 
     hoja_de_vida = models.FileField(upload_to='cv', blank=True, null=True)
-    cv_last_update = models.DateField(blank=True, null=True)
+    cv_last_update = models.DateField(blank=True, null=True, editable=False)
 
     email = models.EmailField(blank=True, null=True)
 
