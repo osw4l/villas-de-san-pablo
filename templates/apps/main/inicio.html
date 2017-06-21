@@ -1,4 +1,10 @@
 {% extends 'index.html' %}
+
+{% block css_extra %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'assets/css/counts.css' %}">
+{% endblock %}
+
 {% block main %}
     <div class="row">
         <div class="col-lg-3">
@@ -10,7 +16,7 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             <p class="announcement-heading">
-                                <h3 class="text-white">12</h3>
+                                <h3 class="text-white">{{ casas }}</h3>
                             </p>
                             <!--	<p class="announcement-text">Users</p> -->
                         </div>
@@ -39,13 +45,13 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             <p class="announcement-heading">
-                                <h3 class="text-white">12</h3>
+                                <h3 class="text-white">{{ personas }}</h3>
                             </p>
                             <!-- <p class="announcement-text"> Items</p> -->
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{% url 'personas:lista_personas' %}">
                     <div class="panel-footer announcement-bottom">
                         <div class="row">
                             <div class="col-xs-6">
@@ -60,7 +66,7 @@
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="panel panel-success">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
@@ -68,7 +74,7 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             <p class="announcement-heading">
-                            <h3 class="text-white">12</h3>
+                            <h3 class="text-white">{{ manzanas }}</h3>
                             </p>
                         </div>
                     </div>
@@ -88,7 +94,7 @@
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="panel panel-danger">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
@@ -96,12 +102,12 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             <p class="announcement-heading">
-                                <h3 class="text-white">12</h3>
+                                <h3 class="text-white">{{ vacantes }}</h3>
                             </p>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{% url 'empleabilidad:lista_vacantes' %}">
                     <div class="panel-footer announcement-bottom">
                         <div class="row">
                             <div class="col-xs-6">
@@ -116,5 +122,123 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="panel panel-info">
+                <div class="panel-heading background-purple">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <i class="fa fa-money fa-5x"></i>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">
+                                <h3 class="text-white">{{ negocios }}</h3>
+                            </p>
+                            <!--	<p class="announcement-text">Users</p> -->
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'emprendimiento:lista_negocio' %}">
+                    <div class="panel-footer announcement-bottom">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                Negocios
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-warning">
+                <div class="panel-heading background-orange">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <i class="fa fa-line-chart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">
+                                <h3 class="text-white">{{ emprendimientos }}</h3>
+                            </p>
+                            <!-- <p class="announcement-text"> Items</p> -->
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'emprendimiento:lista_emprendimiento' %}">
+                    <div class="panel-footer announcement-bottom">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                Emprendimientos
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-success">
+                <div class="panel-heading background-olive">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <i class="fa fa-university fa-5x"></i>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">
+                            <h3 class="text-white">{{ empresas }}</h3>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'emprendimiento:lista_empresa' %}">
+                    <div class="panel-footer announcement-bottom">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                Empresas
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-danger">
+                <div class="panel-heading background-blue">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <i class="fa fa-heart-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <p class="announcement-heading">
+                                <h3 class="text-white">{{ oportunidades_comerciales }}</h3>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'emprendimiento:lista_oportunidad_comercial' %}">
+                    <div class="panel-footer announcement-bottom">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                Oportunidades
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <i class="fa fa-arrow-circle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 

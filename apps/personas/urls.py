@@ -108,8 +108,8 @@ urlpatterns = [
         views.crear_persona,
         name='crear_persona'),
 
-    url(r'^editar-persona/',
-        views.crear_persona,
+    url(r'^editar-persona/(?P<pk>\d+)/',
+        views.editar_persona,
         name='editar_persona'),
 
     url(r'^lista-persona/',
