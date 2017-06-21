@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from apps.empleabilidad.forms import get_vacante_persona_formset as vacante_formset, \
     get_formacion_trabajo_persona_formset  as formacion_trabajo_formset
+from apps.habilidades_blandas.forms import get_habilidad_blanda_persona_formset as habilidad_formset
 from apps.utils import views
 from . import models
 from . import forms
@@ -132,27 +133,29 @@ class CasaListView(views.BaseListViewDinamicHeader):
 
 @login_required
 def crear_persona(request):
-    template_name = 'apps/personas/persona/base_form.html'
     form_class = forms.PersonaForm
     experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=1, can_delete=True)
     formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=1, can_delete=True)
     vacanteFormset = vacante_formset(form_class, extra=1, can_delete=True)
     formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=1, can_delete=True)
+    habilidadBlandaFormset = habilidad_formset(form_class, extra=1, can_delete=1)
     persona = models.Persona()
     form = forms.PersonaForm(request.POST or None, instance=persona)
     formset_1 = experienciaFormset(request.POST or None, instance=persona)
     formset_2 = formacionFormset(request.POST or None, instance=persona)
     formset_3 = vacanteFormset(request.POST or None, instance=persona)
     formset_4 = formacionTrabajoFormset(request.POST or None, instance=persona)
+    formset_5 = habilidadBlandaFormset(request.POST or None, instance=persona)
     if request.POST:
         if form.is_valid() and formset_1.is_valid() and formset_2.is_valid()\
-                and formset_3.is_valid() and formset_4.is_valid():
+                and formset_3.is_valid() and formset_4.is_valid() and formset_5.is_valid():
             form.save()
             formset_1.save()
             formset_2.save()
             formset_3.save()
             formset_4.save()
-            return redirect('inventario:combos')
+            formset_5.save()
+            return redirect('personas:lista_personas')
 
     context = {
         'form': form,
@@ -160,9 +163,10 @@ def crear_persona(request):
         'formset_2': formset_2,
         'formset_3': formset_3,
         'formset_4': formset_4,
+        'formset_5': formset_5,
         'action': 'Crear Persona'
     }
-    return render(request, template_name, context)
+    return render(request, 'apps/personas/persona/base_form.html', context)
 
 
 @login_required

@@ -12,7 +12,7 @@ class Capacitacion(models.Model):
 
 
 class HabilidadBlanda(models.Model):
-    persona = models.ForeignKey('personas.Persona')
+    persona = models.ForeignKey('personas.Persona', related_name='item_e')
     estado_certificado = models.CharField(
         max_length=30,
         choices=constants.ESTADO_CERTIFICADO

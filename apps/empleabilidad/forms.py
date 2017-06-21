@@ -4,6 +4,7 @@ from apps.utils import forms as utils, constants
 from django.forms import models as models_form
 from apps.personas import models as persona_models
 
+
 class VacanteForm(utils.BaseFormAllFields):
     title = 'Vacante'
     fecha = forms.DateField(input_formats=constants.INPUT_FORMATS)
