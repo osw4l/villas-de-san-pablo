@@ -20,7 +20,7 @@ class CantidadPersonas(object):
 
 class GradoEscolaridad(CantidadPersonas, models.Model):
     nombre_grado_escolaridad = models.CharField(
-        max_length=30,
+        max_length=150,
         unique=True
     )
 
@@ -43,7 +43,7 @@ class GradoEscolaridad(CantidadPersonas, models.Model):
 
 class TituloGrado(CantidadPersonas, models.Model):
     nombre_titulo = models.CharField(
-        max_length=50,
+        max_length=150,
         unique=True
     )
     grado_escolaridad = models.ForeignKey(GradoEscolaridad)
@@ -67,7 +67,7 @@ class TituloGrado(CantidadPersonas, models.Model):
 
 class TipoManzana(CantidadPersonas, models.Model):
     nombre_tipo_manzana = models.CharField(
-        max_length=30,
+        max_length=150,
         unique=True
     )
 
@@ -93,7 +93,7 @@ class TipoManzana(CantidadPersonas, models.Model):
 
 class TipoVivienda(CantidadPersonas, models.Model):
     nombre_tipo_vivienda = models.CharField(
-        max_length=30,
+        max_length=150,
         unique=True
     )
 
