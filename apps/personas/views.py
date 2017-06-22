@@ -136,9 +136,9 @@ def crear_persona(request):
     form_class = forms.PersonaForm
     experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=1, can_delete=True)
     formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=1, can_delete=True)
-    vacanteFormset = vacante_formset(form_class, extra=5, can_delete=True)
-    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=5, can_delete=True)
-    habilidadBlandaFormset = habilidad_formset(form_class, extra=5, can_delete=True)
+    vacanteFormset = vacante_formset(form_class, extra=2, can_delete=True)
+    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=2, can_delete=True)
+    habilidadBlandaFormset = habilidad_formset(form_class, extra=2, can_delete=True)
     persona = models.Persona()
     form = forms.PersonaForm(request.POST or None, instance=persona)
     formset_1 = experienciaFormset(request.POST or None, instance=persona)
@@ -172,11 +172,11 @@ def crear_persona(request):
 @login_required
 def editar_persona(request, **kwargs):
     form_class = forms.PersonaForm
-    experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=1, can_delete=True)
-    formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=1, can_delete=True)
-    vacanteFormset = vacante_formset(form_class, extra=5, can_delete=True)
-    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=5, can_delete=True)
-    habilidadBlandaFormset = habilidad_formset(form_class, extra=5, can_delete=True)
+    experienciaFormset = forms.get_experiencia_laboral_persona_formset(form_class, extra=0, can_delete=True)
+    formacionFormset = forms.get_formacion_complementaria_persona_formset(form_class, extra=0, can_delete=True)
+    vacanteFormset = vacante_formset(form_class, extra=0, can_delete=True)
+    formacionTrabajoFormset = formacion_trabajo_formset(form_class, extra=0, can_delete=True)
+    habilidadBlandaFormset = habilidad_formset(form_class, extra=0, can_delete=True)
     pk = kwargs.get('pk')
     persona = models.Persona.objects.get(id=pk)
     form = forms.PersonaForm(request.POST or None, instance=persona)
