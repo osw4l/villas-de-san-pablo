@@ -5,7 +5,7 @@ from . import constants
 
 
 class Vacante(models.Model):
-    cargo = models.CharField(max_length=30)
+    cargo = models.CharField(max_length=255)
     salario = models.PositiveIntegerField()
     fecha = models.DateField()
 
@@ -39,7 +39,7 @@ class VacantePersona(models.Model):
         null=True
     )
     observaciones = models.CharField(
-        max_length=100,
+        max_length=255,
         blank=True,
         null=True
     )
@@ -48,7 +48,7 @@ class VacantePersona(models.Model):
 class FormacionTrabajo(models.Model):
     fecha_creacion = models.DateField()
     nombre_programa = models.CharField(
-        max_length=100
+        max_length=255
     )
 
     def __str__(self):
@@ -84,7 +84,7 @@ class FormacionTrabajoPersona(models.Model):
         null=True
     )
     observacion = models.CharField(
-        max_length=100,
+        max_length=255,
         blank=True,
         null=True
     )
